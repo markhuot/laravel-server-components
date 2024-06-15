@@ -19,13 +19,13 @@ function laravelServerActions() {
                 let body = []
 
                 req.on('data', (chunk) => {
-                    body.push(chunk)
+                    body.push(chunk);
                 })
 
                 req.on('end', async () => {
-                    const { path, props } = JSON.parse(body);
-                    const { render } = await server.ssrLoadModule(`./render.ts`);
-                    render(res, path, props);
+                    const props = JSON.parse(body);
+                    const { render } = await server.ssrLoadModule(`./render.tsx`);
+                    render(res, props);
                 })
             });
 
